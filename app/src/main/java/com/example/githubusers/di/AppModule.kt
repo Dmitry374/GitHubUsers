@@ -3,6 +3,7 @@ package com.example.githubusers.di
 import com.example.githubusers.BuildConfig
 import com.example.githubusers.common.Constants
 import com.example.githubusers.network.ApiService
+import com.example.githubusers.repository.GithubRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -42,5 +43,11 @@ class AppModule {
         return OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideNewsRepository(apiService: ApiService): GithubRepository {
+        return GithubRepository(apiService)
     }
 }

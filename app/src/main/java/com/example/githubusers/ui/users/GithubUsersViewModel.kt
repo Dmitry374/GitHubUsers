@@ -8,4 +8,8 @@ class GithubUsersViewModel @Inject constructor(
     private val githubRepository: GithubRepository
 ) : ViewModel() {
 
+    fun getSomeText(): String {
+        return githubRepository.getSomeText()
+    }
+
 }
