@@ -1,10 +1,11 @@
-package com.example.githubusers
+package com.example.githubusers.ui.users
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.githubusers.R
 
 class GithubUsersFragment : Fragment() {
 
