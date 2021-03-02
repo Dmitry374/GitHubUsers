@@ -6,7 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.example.githubusers.R
-import com.example.githubusers.ui.GitHubUsersActivity
+import com.example.githubusers.ui.users.GitHubUsersActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin">16dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
     <dimen name="padding">16dp</dimen>
     <dimen name="item_avatar_name_text_size">20sp</dimen>
+
+    <dimen name="login_user_detail_text_size">16sp</dimen>
+    <dimen name="link_user_detail_text_size">16sp</dimen>
+    <dimen name="location_user_detail_text_size">16sp</dimen>
+    <dimen name="avatar_size">100dp</dimen>
+    <dimen name="avatar_name_margin">20dp</dimen>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.githubusers.di
 
+import com.example.githubusers.ui.detail.UserDetailFragment
 import com.example.githubusers.ui.users.GithubUsersFragment
 import dagger.Component
 import javax.inject.Singleton
@@ -9,4 +10,6 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(githubUsersFragment: GithubUsersFragment)
+
+    fun inject(userDetailFragment: UserDetailFragment)
 }

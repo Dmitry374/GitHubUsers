@@ -5,10 +5,14 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.rxjava2.flowable
 import com.example.githubusers.common.Constants
+import com.example.githubusers.data.UserDetail
 import com.example.githubusers.data.UsersResponseItem
+import com.example.githubusers.network.ApiService
 import io.reactivex.Flowable
+import io.reactivex.Single
 
 class GithubUserRepository(
+    private val apiService: ApiService,
     private val dataSource: GithubUsersPaginationDataSource
 ) {
 
@@ -25,5 +29,9 @@ class GithubUserRepository(
             pagingSourceFactory = { dataSource }
         )
             .flowable
+    }
+
+    fun getUserDetails(username: String): Single<UserDetail> {
+        return apiService.getUserDetails(username)
     }
 }

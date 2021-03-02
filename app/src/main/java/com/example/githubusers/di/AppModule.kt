@@ -56,7 +56,10 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideGithubUserRepository(githubUsersPaginationDataSource: GithubUsersPaginationDataSource): GithubUserRepository {
-        return GithubUserRepository(githubUsersPaginationDataSource)
+    fun provideGithubUserRepository(
+        apiService: ApiService,
+        githubUsersPaginationDataSource: GithubUsersPaginationDataSource
+    ): GithubUserRepository {
+        return GithubUserRepository(apiService, githubUsersPaginationDataSource)
     }
 }

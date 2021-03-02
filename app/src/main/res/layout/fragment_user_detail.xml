@@ -3,16 +3,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding">
 
     <TextView
-        android:id="@+id/textViewUserName"
+        android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/item_avatar_name_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAvatarDetail"
+        app:layout_constraintTop_toTopOf="@+id/imageViewAvatarDetail"
+        tools:text="Иван Иванов" />
+
+    <TextView
+        android:id="@+id/textViewUserLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/profile_detail_text_color"
+        android:textSize="@dimen/login_user_detail_text_size"
+        app:layout_constraintStart_toStartOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@+id/userName"
+        tools:text="Ivan" />
+
+    <ImageView
+        android:id="@+id/imageViewAvatarDetail"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
+        android:contentDescription="@string/github_user_avatar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Ivan" />
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/userLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:textColor="@color/link_text_color"
+        android:textSize="@dimen/link_user_detail_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewAvatarDetail"
+        tools:text="link" />
+
+    <TextView
+        android:id="@+id/userLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:textColor="@color/black"
+        android:textSize="@dimen/location_user_detail_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userLink"
+        tools:text="location" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

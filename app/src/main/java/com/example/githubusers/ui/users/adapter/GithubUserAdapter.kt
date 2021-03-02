@@ -50,7 +50,7 @@ class GithubUserAdapter(private val onUserClickListener: (UsersResponseItem) -> 
                     .circleCrop()
                     .into(imageViewUserAvatar)
 
-                textViewUserName.text = usersResponseItem.login
+                textViewUserLogin.text = usersResponseItem.login
             }
 
         }
