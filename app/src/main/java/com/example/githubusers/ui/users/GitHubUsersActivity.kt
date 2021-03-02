@@ -18,9 +18,11 @@ class GitHubUsersActivity : AppCompatActivity(), FragmentCommunicationInterface 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_git_hub_users)
 
-        fragmentManager.beginTransaction()
-            .replace(R.id.nav_host_container, githubUsersFragment)
-            .commit()
+        if (savedInstanceState == null) {
+            fragmentManager.beginTransaction()
+                .replace(R.id.nav_host_container, githubUsersFragment)
+                .commit()
+        }
     }
 
     override fun onOpenUserDetail(usersResponseItem: UsersResponseItem) {

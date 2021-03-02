@@ -58,7 +58,9 @@ class UserDetailFragment : Fragment() {
         val usersResponseItem =
             requireArguments().getParcelable<UsersResponseItem>(ARG_GITHUB_USER) as UsersResponseItem
 
-        userDetailViewModel.getUserDetails(usersResponseItem.login)
+        if (savedInstanceState == null) {
+            userDetailViewModel.getUserDetails(usersResponseItem.login)
+        }
 
         userDetailViewModel.userDetail.observe(viewLifecycleOwner, Observer {
             it?.let { userDetail ->
