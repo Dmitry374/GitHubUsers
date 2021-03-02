@@ -7,9 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.githubusers.App
 import com.example.githubusers.R
+import com.example.githubusers.ui.users.adapter.GithubUserAdapter
+import com.example.githubusers.ui.users.adapter.LoadingAdapter
+import kotlinx.android.synthetic.main.fragment_github_users_list.*
 import javax.inject.Inject
 
 class GithubUsersFragment : Fragment() {
@@ -20,6 +24,11 @@ class GithubUsersFragment : Fragment() {
     private val githubUsersViewModel: GithubUsersViewModel by viewModels {
         viewModelFactory
     }
+
+    private val githubUserAdapter: GithubUserAdapter =
+        GithubUserAdapter { userResponseItem ->
+
+        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,5 +42,22 @@ class GithubUsersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.fragment_github_users_list, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        initRecycler()
+    }
+
+    private fun initRecycler() {
+        githubUserRecycler.adapter = githubUserAdapter.withLoadStateFooter(LoadingAdapter())
+
+        githubUsersViewModel.users.observe(viewLifecycleOwner, Observer {
+            it?.let { pagingData ->
+                githubUserAdapter
+                    .submitData(lifecycle, pagingData)
+            }
+        })
     }
 }

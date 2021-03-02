@@ -3,7 +3,8 @@ package com.example.githubusers.di
 import com.example.githubusers.BuildConfig
 import com.example.githubusers.common.Constants
 import com.example.githubusers.network.ApiService
-import com.example.githubusers.repository.GithubRepository
+import com.example.githubusers.repository.GithubUserRepository
+import com.example.githubusers.repository.GithubUsersPaginationDataSource
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -47,7 +48,15 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideNewsRepository(apiService: ApiService): GithubRepository {
-        return GithubRepository(apiService)
+    fun provideGithubUsersPaginationDataSource(apiService: ApiService): GithubUsersPaginationDataSource {
+        return GithubUsersPaginationDataSource(
+            apiService
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideGithubUserRepository(githubUsersPaginationDataSource: GithubUsersPaginationDataSource): GithubUserRepository {
+        return GithubUserRepository(githubUsersPaginationDataSource)
     }
 }

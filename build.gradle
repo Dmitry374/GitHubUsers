@@ -40,6 +40,6 @@ ext {
     retrofit_version = "2.9.0"
     okhttp_version = "4.9.0"
     lifecycle_version = "2.2.0"
-    paging_version = "3.0.0-beta01"
+    paging_version = "3.0.0-alpha09"
     dagger_version = "2.29.1"
 }
