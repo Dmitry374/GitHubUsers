@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.githubusers.App
 import com.example.githubusers.R
+import com.example.githubusers.ui.communication.FragmentCommunicationInterface
 import com.example.githubusers.ui.users.adapter.GithubUserAdapter
 import com.example.githubusers.ui.users.adapter.LoadingAdapter
 import kotlinx.android.synthetic.main.fragment_github_users_list.*
@@ -25,15 +26,21 @@ class GithubUsersFragment : Fragment() {
         viewModelFactory
     }
 
+    private var fragmentCommunicationInterface: FragmentCommunicationInterface? = null
+
     private val githubUserAdapter: GithubUserAdapter =
         GithubUserAdapter { userResponseItem ->
-
+            fragmentCommunicationInterface?.onOpenUserDetail(userResponseItem)
         }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
         (requireActivity().application as App).appComponent.inject(this)
+
+        if (context is FragmentCommunicationInterface) {
+            fragmentCommunicationInterface = context
+        }
     }
 
     override fun onCreateView(

@@ -1,7 +1,10 @@
 package com.example.githubusers.data
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class UsersResponseItem(
     @SerializedName("avatar_url")
     val avatarUrl: String,
@@ -35,4 +38,4 @@ data class UsersResponseItem(
     val subscriptionsUrl: String,
     val type: String,
     val url: String
-)
+) : Parcelable
