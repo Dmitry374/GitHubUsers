@@ -17,7 +17,7 @@ class GitHubUsersActivity : AppCompatActivity() {
         setContentView(R.layout.activity_git_hub_users)
 
         fragmentManager.beginTransaction()
-            .add(R.id.nav_host_container, githubUsersFragment)
+            .replace(R.id.nav_host_container, githubUsersFragment)
             .commit()
     }
 }

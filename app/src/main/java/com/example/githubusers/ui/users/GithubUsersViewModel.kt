@@ -3,11 +3,14 @@ package com.example.githubusers.ui.users
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.rxjava2.cachedIn
 import com.example.githubusers.data.UsersResponseItem
 import com.example.githubusers.repository.GithubUserRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class GithubUsersViewModel @Inject constructor(
@@ -28,6 +31,8 @@ class GithubUsersViewModel @Inject constructor(
 
         compositeDisposable.add(
             githubUserRepository.loadGithubUserList()
+                .cachedIn(viewModelScope)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ pagingData ->
                     _users.value = pagingData

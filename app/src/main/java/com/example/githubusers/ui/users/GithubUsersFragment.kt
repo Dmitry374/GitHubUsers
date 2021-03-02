@@ -55,8 +55,7 @@ class GithubUsersFragment : Fragment() {
 
         githubUsersViewModel.users.observe(viewLifecycleOwner, Observer {
             it?.let { pagingData ->
-                githubUserAdapter
-                    .submitData(lifecycle, pagingData)
+                githubUserAdapter.submitData(lifecycle, pagingData)
             }
         })
     }
