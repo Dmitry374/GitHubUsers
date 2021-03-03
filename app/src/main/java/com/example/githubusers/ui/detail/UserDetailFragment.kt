@@ -1,11 +1,15 @@
 package com.example.githubusers.ui.detail
 
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -106,5 +110,16 @@ class UserDetailFragment : Fragment() {
             .load(usersResponseItem.avatarUrl)
             .circleCrop()
             .into(imageViewAvatarDetail)
+
+        val urlIntent = Intent(Intent.ACTION_VIEW, Uri.parse(usersResponseItem.htmlUrl))
+
+        userLink.setOnClickListener {
+            try {
+                startActivity(urlIntent)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(requireActivity(), R.string.activity_not_found, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
     }
 }

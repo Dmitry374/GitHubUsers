@@ -4,4 +4,6 @@
     <string name="github_user_avatar">Github user avatar</string>
 
     <string name="transition_name_template">transitionImage%1$d</string>
+
+    <string name="activity_not_found">App not found</string>
 </resources>
