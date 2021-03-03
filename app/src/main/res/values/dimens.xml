@@ -10,4 +10,6 @@
     <dimen name="location_user_detail_text_size">16sp</dimen>
     <dimen name="avatar_size">100dp</dimen>
     <dimen name="avatar_name_margin">20dp</dimen>
+
+    <dimen name="app_name_text_size">30sp</dimen>
 </resources>
