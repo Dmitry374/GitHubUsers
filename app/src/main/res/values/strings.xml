@@ -2,4 +2,6 @@
     <string name="app_name">GitHub Users</string>
 
     <string name="github_user_avatar">Github user avatar</string>
+
+    <string name="transition_name_template">transitionImage%1$d</string>
 </resources>

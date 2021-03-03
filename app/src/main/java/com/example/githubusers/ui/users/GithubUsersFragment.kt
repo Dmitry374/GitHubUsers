@@ -29,8 +29,12 @@ class GithubUsersFragment : Fragment() {
     private var fragmentCommunicationInterface: FragmentCommunicationInterface? = null
 
     private val githubUserAdapter: GithubUserAdapter =
-        GithubUserAdapter { userResponseItem ->
-            fragmentCommunicationInterface?.onOpenUserDetail(userResponseItem)
+        GithubUserAdapter { userResponseItem, avatarImage, transitionName ->
+            fragmentCommunicationInterface?.onOpenUserDetail(
+                userResponseItem,
+                avatarImage,
+                transitionName
+            )
         }
 
     override fun onAttach(context: Context) {

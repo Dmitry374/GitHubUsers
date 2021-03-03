@@ -1,6 +1,7 @@
 package com.example.githubusers.ui.detail
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.TransitionInflater
 import com.bumptech.glide.Glide
 import com.example.githubusers.App
 import com.example.githubusers.R
@@ -19,9 +21,17 @@ import javax.inject.Inject
 
 class UserDetailFragment : Fragment() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val userDetailViewModel: UserDetailViewModel by viewModels {
+        viewModelFactory
+    }
+
     companion object {
 
         private const val ARG_GITHUB_USER = "github_user"
+        private const val ARG_AVATAR_IMAGE_TRANSITION_NAME = "avatar_image_transition_name"
 
         fun newInstance(usersResponseItem: UsersResponseItem): UserDetailFragment =
             UserDetailFragment().apply {
@@ -29,13 +39,27 @@ class UserDetailFragment : Fragment() {
                     ARG_GITHUB_USER to usersResponseItem
                 )
             }
+
+        fun newInstance(
+            usersResponseItem: UsersResponseItem,
+            transitionName: String
+        ): UserDetailFragment =
+            UserDetailFragment().apply {
+                arguments =
+                    bundleOf(
+                        ARG_GITHUB_USER to usersResponseItem,
+                        ARG_AVATAR_IMAGE_TRANSITION_NAME to transitionName
+                    )
+            }
     }
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    private val userDetailViewModel: UserDetailViewModel by viewModels {
-        viewModelFactory
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            sharedElementEnterTransition =
+                TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -57,6 +81,12 @@ class UserDetailFragment : Fragment() {
 
         val usersResponseItem =
             requireArguments().getParcelable<UsersResponseItem>(ARG_GITHUB_USER) as UsersResponseItem
+
+        val transitionName = requireArguments().getString(ARG_AVATAR_IMAGE_TRANSITION_NAME)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            imageViewAvatarDetail.transitionName = transitionName
+        }
 
         if (savedInstanceState == null) {
             userDetailViewModel.getUserDetails(usersResponseItem.login)

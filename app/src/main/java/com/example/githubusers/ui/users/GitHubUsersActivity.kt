@@ -1,6 +1,7 @@
 package com.example.githubusers.ui.users
 
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.githubusers.R
 import com.example.githubusers.data.UsersResponseItem
@@ -25,10 +26,27 @@ class GitHubUsersActivity : AppCompatActivity(), FragmentCommunicationInterface 
         }
     }
 
-    override fun onOpenUserDetail(usersResponseItem: UsersResponseItem) {
-        fragmentManager.beginTransaction()
-            .replace(R.id.nav_host_container, UserDetailFragment.newInstance(usersResponseItem))
-            .addToBackStack(null)
-            .commit()
+    override fun onOpenUserDetail(
+        usersResponseItem: UsersResponseItem,
+        avatarImageView: ImageView?,
+        transitionName: String?
+    ) {
+
+        if (avatarImageView != null && transitionName != null) {
+            fragmentManager.beginTransaction()
+                .addSharedElement(avatarImageView, transitionName)
+                .replace(
+                    R.id.nav_host_container,
+                    UserDetailFragment.newInstance(usersResponseItem, transitionName)
+                )
+                .addToBackStack(null)
+                .commit()
+        } else {
+            fragmentManager.beginTransaction()
+                .replace(R.id.nav_host_container, UserDetailFragment.newInstance(usersResponseItem))
+                .addToBackStack(null)
+                .commit()
+        }
+
     }
 }

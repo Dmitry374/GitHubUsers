@@ -32,8 +32,8 @@
 
     <ImageView
         android:id="@+id/imageViewAvatarDetail"
-        android:layout_width="@dimen/avatar_size"
-        android:layout_height="@dimen/avatar_size"
+        android:layout_width="@dimen/avatar_user_detail_size"
+        android:layout_height="@dimen/avatar_user_detail_size"
         android:contentDescription="@string/github_user_avatar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
