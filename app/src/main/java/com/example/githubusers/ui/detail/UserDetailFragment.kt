@@ -88,10 +88,6 @@ class UserDetailFragment : Fragment() {
 
         val transitionName = requireArguments().getString(ARG_AVATAR_IMAGE_TRANSITION_NAME)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            imageViewAvatarDetail.transitionName = transitionName
-        }
-
         if (savedInstanceState == null) {
             userDetailViewModel.getUserDetails(usersResponseItem.login)
         }
@@ -105,11 +101,25 @@ class UserDetailFragment : Fragment() {
             }
         })
 
+        fillAvatarImage(usersResponseItem, transitionName)
+
+        fillLinkClickListener(usersResponseItem)
+    }
+
+    private fun fillAvatarImage(usersResponseItem: UsersResponseItem, transitionName: String?) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            imageViewAvatarDetail.transitionName = transitionName
+        }
+
         Glide
             .with(imageViewAvatarDetail)
             .load(usersResponseItem.avatarUrl)
             .circleCrop()
             .into(imageViewAvatarDetail)
+    }
+
+    private fun fillLinkClickListener(usersResponseItem: UsersResponseItem) {
 
         val urlIntent = Intent(Intent.ACTION_VIEW, Uri.parse(usersResponseItem.htmlUrl))
 
